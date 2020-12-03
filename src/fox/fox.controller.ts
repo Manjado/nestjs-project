@@ -1,4 +1,16 @@
-import { Controller, Get, Headers, Ip, Query, Req, Res } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Header,
+  HttpCode,
+  Ip,
+  Param,
+  Post,
+  Query,
+  Redirect,
+  Req,
+  Res,
+} from '@nestjs/common';
 import { Request, Response } from 'express';
 import { of } from 'rxjs';
 import { UserData } from 'src/interface/user-data';
@@ -49,14 +61,72 @@ export class FoxController {
   //   response.json([]);
   // }
   //---------------------------------------------
-  @Get()
-  // async myFirstAction(): Promise<UserData> {
-  myFirstAction(): UserData {
-    return {
-      name: 'Testowy',
-      surname: 'Osoba',
-      age: 99,
-    };
+  //DEFAULT
+  //@Get()
+  // //async myFirstAction(): Promise<UserData> {
+  // myFirstAction(): UserData {
+  //   return {
+  //     name: 'Testowy',
+  //     surname: 'Osoba',
+  //     age: 99,
+  //   };
+  // }
+  //-----------------------------------------------
+  // HTTPCODE, HEDER
+  // @Get()
+  // @HttpCode(200)
+  // @Header('X-My-Test', 'Hellow')
+  // //@Redirect('/test')
+  // myFirstAction(): UserData {
+  //   return {
+  //     name: 'Testowy',
+  //     surname: 'Osoba',
+  //     age: 99,
+  //   };
+  // }
+  //-------------------------------------------------
+  // GET ROUTING
+  // @Get('/')
+  // index(): string {
+  //   return 'home screen';
+  // }
+  // @Get('/one')
+  // myFirstAction(): UserData {
+  //   return {
+  //     name: 'Testowy',
+  //     surname: 'Osoba',
+  //     age: 99,
+  //   };
+  // }
+  // @Get('/second')
+  // mySecondAction(): string {
+  //   return 'Hello, World!';
+  // }
+  //--------------------------------------------------
+
+  // CRUD
+  // @Get('/')
+  // getItem(): string {
+  //   return 'My items';
+  // }
+
+  // @Post('/')
+  // postItem(): string {
+  //   return 'ok!';
+  // }
+  //----------------------------------------------------
+  // PARAM
+  // @Get('/:name/:surname')
+  // getItem(
+  //   @Param('name') name: string,
+  //   @Param('surname') surname: string,
+  // ): string {
+  //   return `Hello! ${name} ${surname}`;
+  // }
+
+  @Get('/:id/:title?')
+  getFox(@Param('id') id: number): string {
+    return `Fox #${id}`;
   }
 }
 
