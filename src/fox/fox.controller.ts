@@ -1,4 +1,5 @@
 import {
+  Body,
   Controller,
   Get,
   Header,
@@ -15,6 +16,7 @@ import { Request, Response } from 'express';
 import { of } from 'rxjs';
 import { UserData } from 'src/interface/user-data';
 import { sleep } from 'src/utils/sleep';
+import { CreateFoxDto } from './dto/create-fox.dto';
 
 @Controller('fox')
 export class FoxController {
@@ -124,9 +126,17 @@ export class FoxController {
   //   return `Hello! ${name} ${surname}`;
   // }
 
-  @Get('/:id/:title?')
-  getFox(@Param('id') id: number): string {
-    return `Fox #${id}`;
+  // OPTIONAL PARAM
+  // @Get('/:id/:title?')
+  // getFox(@Param('id') id: number): string {
+  //   return `Fox #${id}`;
+  // }
+  //----------------------------------------------------
+
+  @Post('/')
+  createFox(@Body() nexFox: CreateFoxDto): string {
+    console.log(nexFox);
+    return `New fox #${nexFox.name} created.`;
   }
 }
 
